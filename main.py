@@ -1,8 +1,10 @@
 import chess
+import time
 
 board = chess.Board(input("Enter FEN code: "))
 d = int(input("Enter depth: "))
 color = board.turn #WHITE == True; BLACK = False
+verbDepth = 1
 
 class Node:
     def __init__(self, parent=None, move=None):
@@ -32,7 +34,14 @@ def findCheckmates(depth, node):
     moves = board.legal_moves
     returnVal = False
     if moves:
+        verb = verbDepth > (d-depth)
+        if verb:
+            t = time.time()
+            c = board.legal_moves.count()
+            k = 1
         for myMove in moves:
+            if verb:
+                t = time.time()
             board.push(myMove)
             if board.is_checkmate():
                 Node(node, myMove.uci())
@@ -56,10 +65,15 @@ def findCheckmates(depth, node):
                 board.pop()
             else:
                 board.pop()
+            if verb:
+                print(f'{d-depth+1}: {k}/{c} took {time.time()-t} seconds')
+                k += 1
     return returnVal
 
 
 if board.is_checkmate():
     print("You are in a checkmate")
+t = time.time()
 findCheckmates(d, head)
 head.print()
+print(time.time()-t, 'seconds')
