@@ -28,12 +28,6 @@ class Node:
 
 head = Node()
 
-#DEBUG 8/5p2/5P1p/5PkN/6P1/4N1Rp/7P/6KQ w - - 0 2
-#AND
-#board.push(chess.Move.from_uci('a8h1'))
-#board.push(chess.Move.from_uci('h4g5'))
-#Q7/5p2/5P1p/5PPN/6Pk/4N1Rp/7P/6K1 w - - 0 1
-
 def findCheckmates(depth, node):
     moves = board.legal_moves
     returnVal = False
