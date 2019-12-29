@@ -1,5 +1,5 @@
 # Check4mate
-Checkmate search for a selected depth. 
+Checkmate search for selected depth. 
 
 For a given chess position, finds if it's possible to make guaranteed checkmate. The program prints the tree of moves to perform the checkmate based on opponent's moves.
 
@@ -22,19 +22,39 @@ Start main.py in terminal and follow instructions in terminal.
    Recommended maximal depth: 3 generally takes 5s-60s on average PC.  
    (For better performance check out the experimental multi-thread branch TODO)
 
-# Options
-Edit options.ini to change
-* Verbose
+# Result
+The result is printed as a tree of your checkmate moves and opponent's legal moves.
 
-  Progress prints
-  * Enable
+For example this checkmate in 3 position: 'r1b1k1nr/p5bp/p1pBq1p1/3pP1P1/N4Q2/8/PPP1N2P/R4RK1 w'
 
-  Should the program print progress: 1 or 0
-  * Depth  
+Prints this result:
+```
+1w: f4f8
+ 1b: e8d7
+  2w: a4c5
+  2w: f1f7
+   2b: g8e7
+    3w: a4c5
+   2b: e6f7
+    3w: a4c5
+   2b: e6e7
+    3w: a4c5
+ 1b: g7f8
+  2w: f1f8
+   2b: e8d7
+    3w: a4c5
+```
 
-   How many fullmoves down should the program print:  >= 0
+If you want to perform the checkmate you have to first play the f4f8 move. Then enemy has 2 legal moves (e8d7 and g7f8). If he then plays e8d7 you have a choice, you can play either a4c5 which is a checkmate or f1f7 which leads into checkmate after another move.
 
-   * Time
+# Test data
 
-   Should the program print the time it took to evaluate moves: 1 or 0
+You can build any position in [Lichess editor](https://lichess.org/editor). Keep in mind that the search is only guaranteed to work on valid positions.
 
+Great checkmate collections on wtharvey.com:
+
+[Checkmates in 2](http://wtharvey.com/m8n2.txt)
+
+[Checkmates in 3](http://wtharvey.com/m8n3.txt)
+
+[Checkmates in 4](http://wtharvey.com/m8n4.txt)
