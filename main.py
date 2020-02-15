@@ -86,7 +86,7 @@ def findCheckmates(depth, node):
                 board.pop()
     return returnVal
 
-# I decided to make this a separate function because it makes the function less understandable 
+# I decided to make this a separate function because it makes the function less understandable and a bit slower 
 def findCheckmatesVerb(depth, node):
     """
     Same function as findCheckmates but with progress prints
@@ -137,12 +137,15 @@ def findCheckmatesVerb(depth, node):
             k += 1
     return returnVal
 
+# Getting user input (position and depth)
 board = chess.Board(input("Enter FEN code: "))
 d = int(input("Enter search depth: "))
+
+# Preparation for result tree
+head = Node()
 color = board.turn #WHITE == True; BLACK = False
 
-head = Node()
-
+# Check if valid moves exist
 if board.legal_moves.count() == 0:
     print("This position has no valid moves")
 
@@ -151,5 +154,7 @@ if progressPrints:
     findCheckmatesVerb(d, head)
 else:
     findCheckmates(d, head)
+
+# Print results
 head.print()
 print(f'The program took: {round(time.time()-t,3)} seconds')
